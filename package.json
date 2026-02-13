@@ -1,0 +1,20 @@
+{
+  "name": "h5-wedding",
+  "version": "1.0.0",
+  "description": "婚礼请柬H5页面",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 3000 -o",
+    "dev": "npx http-server -p 3000 -o"
+  },
+  "keywords": [
+    "wedding",
+    "invitation",
+    "h5"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
