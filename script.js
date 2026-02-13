@@ -1,3 +1,11 @@
+// CloudBase 初始化
+const app = tcb.init({
+    env: 'h5-wedding-7g6a8i0v082fc28c' // 替换为你的 CloudBase 环境 ID
+});
+
+// 获取存储引用
+const storage = app.storage();
+
 // 页面加载完成后执行
  document.addEventListener('DOMContentLoaded', function() {
     // 初始化tab切换
@@ -5,6 +13,9 @@
     
     // 初始化留言提交
     initMessageSubmit();
+    
+    // 初始化相册
+    initAlbum();
  });
 
  // 初始化tab切换
@@ -79,3 +90,58 @@
         }
     });
  }
+
+// 初始化相册
+function initAlbum() {
+    const photoGrid = document.querySelector('.photo-grid');
+    if (!photoGrid) return;
+    
+    // 清空现有照片
+    photoGrid.innerHTML = '';
+    
+    // 显示加载中
+    const loading = document.createElement('div');
+    loading.className = 'loading';
+    loading.textContent = '加载照片中...';
+    photoGrid.appendChild(loading);
+    
+    // 列出存储中的照片文件
+    storage.getFileList({"prefix": "photo/"})
+        .then(res => {
+            if (res.fileList && res.fileList.length > 0) {
+                // 清空加载提示
+                photoGrid.innerHTML = '';
+                
+                // 遍历照片文件
+                res.fileList.forEach(file => {
+                    // 获取文件访问URL
+                    storage.getTempFileURL({"fileList": [file.fileID]})
+                        .then(urlRes => {
+                            if (urlRes.fileList && urlRes.fileList.length > 0) {
+                                const fileUrl = urlRes.fileList[0].tempFileURL;
+                                
+                                // 创建照片元素
+                                const photoItem = document.createElement('div');
+                                photoItem.className = 'photo-item';
+                                photoItem.innerHTML = `
+                                    <img src="${fileUrl}" alt="${file.name}">
+                                `;
+                                
+                                // 添加到相册
+                                photoGrid.appendChild(photoItem);
+                            }
+                        })
+                        .catch(err => {
+                            console.error('获取文件URL失败:', err);
+                        });
+                });
+            } else {
+                // 没有照片
+                photoGrid.innerHTML = '<div class="no-photo">暂无照片</div>';
+            }
+        })
+        .catch(err => {
+            console.error('获取文件列表失败:', err);
+            photoGrid.innerHTML = '<div class="error">加载照片失败</div>';
+        });
+}

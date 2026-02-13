@@ -133,6 +133,7 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+    min-height: 200px;
 }
 
 .photo-item {
@@ -146,6 +147,19 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* 相册加载和错误样式 */
+.loading,
+.no-photos,
+.error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #ddd;
 }
 
 /* 交通指引样式 */
