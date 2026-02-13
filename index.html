@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>婚礼请柬</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>婚礼请柬</h1>
+        </header>
+        
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 婚礼请柬 -->
+            <section id="invitation" class="tab-content active">
+                <div class="invitation-content">
+                    <div class="couple-info">
+                        <h2>新郎 & 新娘</h2>
+                        <div class="names">
+                            <p class="groom">本钰龙</p>
+                            <p class="and">&</p>
+                            <p class="bride">辛无双</p>
+                        </div>
+                    </div>
+                    <div class="wedding-info">
+                        <div class="info-item">
+                            <div class="info-icon">📅</div>
+                            <div class="info-text">
+                                <h3>婚礼日期</h3>
+                                <p>2024年10月1日</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">🕒</div>
+                            <div class="info-text">
+                                <h3>婚礼时间</h3>
+                                <p>12:00 中午</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📍</div>
+                            <div class="info-text">
+                                <h3>婚礼地点</h3>
+                                <p>某某酒店宴会厅</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invitation-text">
+                        <p>诚挚邀请您参加我们的婚礼</p>
+                        <p>共同见证我们的幸福时刻</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 相册 -->
+            <section id="album" class="tab-content">
+                <div class="album-content">
+                    <h2>我们的相册</h2>
+                    <div class="photo-grid">
+                        <div class="photo-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wedding%20couple%20romantic%20photo&image_size=square" alt="婚纱照1">
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wedding%20couple%20outdoor%20photo&image_size=square" alt="婚纱照2">
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wedding%20couple%20indoor%20photo&image_size=square" alt="婚纱照3">
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wedding%20couple%20happy%20photo&image_size=square" alt="婚纱照4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 交通指引 -->
+            <section id="transportation" class="tab-content">
+                <div class="transportation-content">
+                    <h2>交通指引</h2>
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=wedding%20venue%20map%20direction&image_size=landscape_16_9" alt="地图">
+                        </div>
+                    </div>
+                    <div class="transportation-info">
+                        <h3>交通方式</h3>
+                        <div class="transport-item">
+                            <div class="transport-icon">🚗</div>
+                            <div class="transport-text">
+                                <h4>自驾</h4>
+                                <p>导航至：某某酒店</p>
+                                <p>提供免费停车位</p>
+                            </div>
+                        </div>
+                        <div class="transport-item">
+                            <div class="transport-icon">🚌</div>
+                            <div class="transport-text">
+                                <h4>公交</h4>
+                                <p>乘坐XX路公交车到XX站下车</p>
+                                <p>步行5分钟即可到达</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 留言祝福 -->
+            <section id="messages" class="tab-content">
+                <div class="messages-content">
+                    <h2>留言祝福</h2>
+                    <div class="message-form">
+                        <textarea placeholder="写下您的祝福..."></textarea>
+                        <button class="submit-btn">提交祝福</button>
+                    </div>
+                    <div class="message-list">
+                        <div class="message-item">
+                            <div class="message-avatar">A</div>
+                            <div class="message-body">
+                                <div class="message-header">
+                                    <h4>朋友A</h4>
+                                    <p class="message-time">2024-09-15</p>
+                                </div>
+                                <p class="message-text">祝你们新婚快乐，百年好合！</p>
+                            </div>
+                        </div>
+                        <div class="message-item">
+                            <div class="message-avatar">B</div>
+                            <div class="message-body">
+                                <div class="message-header">
+                                    <h4>朋友B</h4>
+                                    <p class="message-time">2024-09-16</p>
+                                </div>
+                                <p class="message-text">早生贵子，幸福美满！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- 底部导航 -->
+        <footer class="footer">
+            <div class="tab-bar">
+                <div class="tab-item active" data-tab="invitation">
+                    <div class="tab-icon">📄</div>
+                    <span>婚礼请柬</span>
+                </div>
+                <div class="tab-item" data-tab="album">
+                    <div class="tab-icon">📷</div>
+                    <span>相册</span>
+                </div>
+                <div class="tab-item" data-tab="transportation">
+                    <div class="tab-icon">🚗</div>
+                    <span>交通指引</span>
+                </div>
+                <div class="tab-item" data-tab="messages">
+                    <div class="tab-icon">💬</div>
+                    <span>留言祝福</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
