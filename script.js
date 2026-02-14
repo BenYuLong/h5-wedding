@@ -117,7 +117,7 @@ async function initAlbum() {
             // 遍历照片
             photos.forEach((photoPath, index) => {
                 // 生成又拍云照片URL
-                const photoUrl = `https://${upyunConfig.domain}/${photoPath}`;
+                const photoUrl = `http://${upyunConfig.domain}/${photoPath}`;
                 
                 // 创建照片元素
                 const photoItem = document.createElement('div');
