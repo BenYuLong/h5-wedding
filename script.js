@@ -1,14 +1,11 @@
-// CloudBase 初始化
-const app = cloudbase.init({
-    env: 'h5-wedding-7g6a8i0v082fc28c',
-    region: 'ap-shanghai'
-});
-
-// 获取存储引用
-const storage = app.storage();
-
-// 获取认证引用
-const auth = app.auth();
+// 又拍云配置
+const upyunConfig = {
+    domain: 'wedding-photos.test.upcdn.net', // 又拍云加速域名
+    bucket: 'wedding-photos', // 又拍云服务名称
+    accessKey: '86211373fbc04094bfd9ff495c135908', // 替换为你的又拍云 AccessKey
+    secretAccessKey: '5616ac3a344f01412907dcf0a7795429', // 替换为你的又拍云 SecretAccessKey
+    prefix: '/' // 照片存储路径前缀
+};
 
 // 页面加载完成后执行
  document.addEventListener('DOMContentLoaded', function() {
@@ -96,7 +93,7 @@ const auth = app.auth();
  }
 
 // 初始化相册
-async function initAlbum() {
+function initAlbum() {
     const photoGrid = document.querySelector('.photo-grid');
     if (!photoGrid) return;
     
@@ -109,51 +106,39 @@ async function initAlbum() {
     loading.textContent = '加载照片中...';
     photoGrid.appendChild(loading);
     
-    try {
-        // 匿名登录
-        await auth.signInAnonymously();
-        console.log('匿名登录成功');
+    // 照片列表（从又拍云获取）
+    const photos = [
+        'photo/1.jpg',
+        'photo/2.jpg',
+        'photo/3.jpg',
+        'photo/4.jpg'
+        // 可以添加更多照片路径
+    ];
+    
+    // 生成照片URL并添加到相册
+    setTimeout(() => {
+        // 清空加载提示
+        photoGrid.innerHTML = '';
         
-        // 列出存储中的照片文件
-        const res = await storage.getFileList({
-            prefix: 'photo/'
-        });
-        
-        if (res.fileList && res.fileList.length > 0) {
-            // 清空加载提示
-            photoGrid.innerHTML = '';
-            
-            // 遍历照片文件
-            for (const file of res.fileList) {
-                try {
-                    // 获取文件访问URL
-                    const urlRes = await storage.getTempFileURL({
-                        fileList: [file.fileID]
-                    });
-                    
-                    if (urlRes.fileList && urlRes.fileList.length > 0) {
-                        const fileUrl = urlRes.fileList[0].tempFileURL;
-                        
-                        // 创建照片元素
-                        const photoItem = document.createElement('div');
-                        photoItem.className = 'photo-item';
-                        photoItem.innerHTML = `
-                            <img src="${fileUrl}" alt="${file.name}">
-                        `;
-                        
-                        // 添加到相册
-                        photoGrid.appendChild(photoItem);
-                    }
-                } catch (urlErr) {
-                    console.error('获取文件URL失败:', urlErr);
-                }
-            }
+        if (photos.length > 0) {
+            // 遍历照片
+            photos.forEach((photoPath, index) => {
+                // 生成又拍云照片URL
+                const photoUrl = `https://${upyunConfig.domain}/${photoPath}`;
+                
+                // 创建照片元素
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.innerHTML = `
+                    <img src="${photoUrl}" alt="照片${index + 1}">
+                `;
+                
+                // 添加到相册
+                photoGrid.appendChild(photoItem);
+            });
         } else {
             // 没有照片
             photoGrid.innerHTML = '<div class="no-photo">暂无照片</div>';
         }
-    } catch (err) {
-        console.error('加载照片失败:', err);
-        photoGrid.innerHTML = '<div class="error">加载照片失败</div>';
-    }
+    }, 500); // 模拟加载延迟
 }
