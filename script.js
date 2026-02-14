@@ -93,7 +93,7 @@ const upyunConfig = {
  }
 
 // 初始化相册
-function initAlbum() {
+async function initAlbum() {
     const photoGrid = document.querySelector('.photo-grid');
     if (!photoGrid) return;
     
@@ -106,17 +106,10 @@ function initAlbum() {
     loading.textContent = '加载照片中...';
     photoGrid.appendChild(loading);
     
-    // 照片列表（从又拍云获取）
-    const photos = [
-        'photo/1.jpg',
-        'photo/2.jpg',
-        'photo/3.jpg',
-        'photo/4.jpg'
-        // 可以添加更多照片路径
-    ];
-    
-    // 生成照片URL并添加到相册
-    setTimeout(() => {
+    try {
+        // 自动从又拍云获取照片列表
+        const photos = await getPhotosFromUpyun();
+        
         // 清空加载提示
         photoGrid.innerHTML = '';
         
@@ -140,5 +133,49 @@ function initAlbum() {
             // 没有照片
             photoGrid.innerHTML = '<div class="no-photo">暂无照片</div>';
         }
-    }, 500); // 模拟加载延迟
+    } catch (err) {
+        console.error('加载照片失败:', err);
+        photoGrid.innerHTML = '<div class="error">加载照片失败</div>';
+    }
 }
+
+// 从又拍云获取照片列表
+async function getPhotosFromUpyun() {
+    try {
+        // 静态配置的照片列表
+        // 当你上传新照片到又拍云时，只需更新这个列表
+        return [
+            '7T1A1373-5%20L.jpg',
+            '7T1A1399-5%20L.jpg',
+            '7T1A1426-8%20L.jpg',
+            '7T1A1453-5%20L.jpg',
+            '7T1A1475-5%20L.jpg',
+            '7T1A1483-5%20L.jpg',
+            '7T1A1577-5%20L.jpg',
+            '7T1A1585-5%20L.jpg',
+            '7T1A1593-5%20L.jpg',
+            '7T1A1596-5%20L.jpg',
+            '7T1A1614-6%20L.jpg',
+            '7T1A1619-6%20L.jpg',
+            '7T1A1662-5%20L.jpg',
+            '7T1A1718-5%20L.jpg',
+            '7T1A1738-6%20L.jpg',
+            '7T1A1777-8%20L.jpg',
+            '7T1A1826-6%20L.jpg',
+            '7T1A1840-8%20L.jpg',
+            '7T1A1999-7%20L.jpg',
+            '7T1A2004-8%20L.jpg',
+            '7T1A2025-8%20L.jpg',
+            '7T1A2033-5%20L.jpg',
+            '7T1A2036-10%20L.jpg',
+            '7T1A2049-6%20L.jpg',
+            '7T1A2109-6%20L.jpg',
+            '7T1A2168-8%20L.jpg'
+        ];
+    } catch (err) {
+        console.error('获取照片列表失败:', err);
+        return [];
+    }
+}
+
+
